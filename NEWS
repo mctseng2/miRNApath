@@ -1,0 +1,9 @@
+Version 1.1
+-- Updated code to use S4 object "mirnapath" instead of S3 object.
+-- Changes "Enriched by Gene" and "Enriched by miRNA" not to be
+   a concatenated long string -- almost always too long to read
+   anyway.
+
+Version 1.0
+Initial release.
+
