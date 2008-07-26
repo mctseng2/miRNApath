@@ -30,7 +30,11 @@ function
    # Return a data.frame with the relevant information
    fulltable <- do.call(rbind, lapply(as.character(groups), function(group)
    {
-      t1 <- data.frame( check.names = FALSE, mirnaobj@enrichment[[group]][c(pvalueTypes, "Measured pathway mirnaGenes", "Enriched pathway mirnaGenes", "Genes Enriched", "miRNAs Enriched", "Total mirnaGenes", "Total filtered mirnaGenes")], "Group" = rep(group, length(mirnaobj@enrichment[[group]][[1]]) ) );
+      t1 <- data.frame( check.names = FALSE, mirnaobj@enrichment[[group]]
+         [c(pvalueTypes, "Measured pathway mirnaGenes", 
+         "Enriched pathway mirnaGenes", "Genes Enriched", 
+         "miRNAs Enriched", "Total mirnaGenes", "Total filtered mirnaGenes")],
+         "Group" = rep(group, length(mirnaobj@enrichment[[group]][[1]]) ) );
       # removed "Enriched by miRNA", "Enriched by Gene" for space considerations
 
       # Filter by P-value
@@ -42,15 +46,15 @@ function
       }
       t1 <- t1[pvaltest,];
       # Add some counts for miRNA-gene hits, instead of very long text strings
-      enrichMiRNACount = sapply(t1[,"Enriched by miRNA"],
-         function(i){nchar(gsub("[^;]", "", i))+1});
-      enrichGeneCount = sapply(t1[,"Enriched by Gene"],
-         function(i){nchar(gsub("[^;]", "", i))+1});
-      enrichEntityCount = sapply(t1[,"Enriched by Gene"],
-         function(i){nchar(gsub("[^;,]", "", i))+1});
-      t1[,"# miRNA enriched"] = enrichMiRNACount;
-      t1[,"# Genes enriched"] = enrichGeneCount;
-      t1[,"# miRNA-Genes enriched"] = enrichEntityCount;
+#      enrichMiRNACount = sapply(t1[,"Enriched by miRNA"],
+#         function(i){nchar(gsub("[^;]", "", i))+1});
+#      enrichGeneCount = sapply(t1[,"Enriched by Gene"],
+#         function(i){nchar(gsub("[^;]", "", i))+1});
+#      enrichEntityCount = sapply(t1[,"Enriched by Gene"],
+#         function(i){nchar(gsub("[^;,]", "", i))+1});
+#      t1[,"# miRNA enriched"] = enrichMiRNACount;
+#      t1[,"# Genes enriched"] = enrichGeneCount;
+#      t1[,"# miRNA-Genes enriched"] = enrichEntityCount;
       t1 <- data.frame( check.names=FALSE, t1, pathwayidcol = rownames(t1), "Pathway Name"=mirnaobj@pathwayList[rownames(t1)] );
       colnames(t1)[colnames(t1) == "pathwayidcol"] = pathwayidcol;
       t1[,pathwayidcol] = as.character(t1[,pathwayidcol]);
@@ -82,14 +86,17 @@ function
          pathwayid <- i[pathwayidcol][[1]];
          group <- i["Group"][[1]];
          GMtable <- mirnaobj@enrichment[[group]]["Enriched miRNA-Genes"][[1]][pathwayid][[1]];
-         SuperTall1 <- data.frame(check.names=FALSE, do.call(rbind, lapply(1:dim(GMtable)[1], function(k2) i) ),
-            GMtable);
+         SuperTall1 <- data.frame(check.names=FALSE, do.call(rbind,
+               lapply(1:dim(GMtable)[1], function(k2) i) ),
+               GMtable);
          SuperTall1;
       } ) )
       SuperTall;
    } else if (format == "Wide")
    {
-      widetable <- reshape (fulltable, direction="wide", idvar=pathwayidcol, timevar="Group", drop=colnames(fulltable)[!colnames(fulltable) %in% c(pathwayidcol, "Group", pvalueTypes)] );
+      widetable <- reshape (fulltable, direction="wide", idvar=pathwayidcol,
+            timevar="Group", drop=colnames(fulltable)[!colnames(fulltable) %in% 
+            c(pathwayidcol, "Group", pvalueTypes)] );
       # Replace NA with another character if supplied
       if (!is.na(na.char))
       {
@@ -98,7 +105,8 @@ function
       # Add in pathway names using the pathway IDs
       widetable[,pathwaycol] <- mirnaobj@pathwayList[widetable[,1]];
       # Then put the pathway IDs and names first in the table
-      widetable <- widetable[,c(pathwayidcol, pathwaycol, colnames(widetable)[!colnames(widetable) %in% c(pathwayidcol, pathwaycol)] )];
+      widetable <- widetable[,c(pathwayidcol, pathwaycol, colnames(widetable)
+         [!colnames(widetable) %in% c(pathwayidcol, pathwaycol)] )];
       widetable;
    }
 }

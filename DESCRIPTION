@@ -1,8 +1,8 @@
 Package: miRNApath
 Type: Package
 Title: miRNApath: Pathway Enrichment for miRNA Expression Data
-Version: 1.1
-Date: 2008-06-10
+Version: 1.1.1
+Date: 2008-07-26
 Author: James M. Ward <jmw86069@gmail.com> with contributions
    from Yunling Shi, Cindy Richards, John P. Cogswell
 Maintainer: James M. Ward <jmw86069@gmail.com>
@@ -17,6 +17,6 @@ Description: This package provides pathway enrichment techniques
    many genes.
 License: LGPL-2.1
 biocViews: Annotation, Pathways, Statistics, DifferentialExpression
-Depends: methods,R(>= 2.6.0)
+Depends: methods,R(>= 2.7.0)
 LazyLoad: Yes
-Packaged: Tue Jun 10 15:22:27 2008; jmw86069
+Packaged: Tue Jul 7 16:09:27 2008; jmw86069

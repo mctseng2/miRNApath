@@ -7,3 +7,9 @@ Version 1.1
 Version 1.0
 Initial release.
 
+Version 1.1
+Changed objects to S4 format
+
+Version 1.1.1
+Updated runEnrichment and mirnaTable to remove the "Enriched by miRNA"
+concatenated strings, which were wasy too long to be useful.
