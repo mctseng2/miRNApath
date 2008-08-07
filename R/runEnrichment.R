@@ -77,9 +77,16 @@ function
          }
          filteredmirnaGene <- mirnaobj@mirnaGene[mirnaobj@mirnaGene[,mirnacol] %in% filteredmirnas,];
 
+         # Test for, and remove, any groups with only one element
+         # (otherwise "second argument must be a list" error)
+         # singletGroups = tapply(groupPathways[,genecol], groupPathways[, pathwayidcol], length) == 1;
+         
          # Generate a table storing mirna, gene, and mirnagene information for each Pathway ID
          pathsizes <- do.call(rbind, tapply( as.character(groupPathways[, genecol]) , groupPathways[, pathwayidcol], function(pathGenes)
          {
+            # Make sure the pathway has one gene only once each
+            pathGenes = unique(pathGenes);
+            
             # If the following has 'unique' it collapses miRNA having multiple binding sites on the same gene to 1 entry
             univmirnaGene <- groupmirnaGene[groupmirnaGene[, genecol] %in% pathGenes,];
             if (length(univmirnaGene) > dim(groupmirnaGene)[2])
@@ -119,13 +126,13 @@ function
          # End pathsizes tapply
 
          # For simplicity, remove pathways with no significant mirnaGenes
-         pathsizes = pathsizes[!"Enriched Count" %in% 0, ];
+         pathsizes = pathsizes[sapply(pathsizes[,"Enriched miRNA-Gene Count"], function(i){i[[1]] > 0;}), ];
 
          # Target P-value command
-         nFilteredmirnaGene = dim(filteredmirnaGene)[1]; # number of enriched mirnaGenes irrespective of the pathways involved
-         nmirnaGene = dim(groupmirnaGene)[1]; # number of mirnaGenes tested overall
-         useCts = do.call(c, pathsizes[, "Enriched miRNA-Gene Count"]); # total enriched mirnaGenes
-         gCounts = do.call(c, pathsizes[, "Pathway miRNA-Gene Count"]); # total mirnaGenes in the universe
+         nFilteredmirnaGene = dim(filteredmirnaGene)[1]; # total number of target mirna-genes represented by the filtered miRNAs
+         nmirnaGene = dim(groupmirnaGene)[1]; # total number of mirna-genes tested (filtered plus unfiltered miRNAs)
+         useCts = do.call(c, pathsizes[, "Enriched miRNA-Gene Count"]); # total enriched mirnaGenes for each pathway
+         gCounts = do.call(c, pathsizes[, "Pathway miRNA-Gene Count"]); # total mirna-genes in each pathway's universe
          pvs <- phyper(useCts - 1, nFilteredmirnaGene, nmirnaGene - nFilteredmirnaGene, gCounts, lower.tail = FALSE)
          names(pvs) = rownames(pathsizes);
 
@@ -136,9 +143,9 @@ function
             r1 = list(pvalues = pvs[ord], "Measured pathway mirnaGenes" = gCounts[ord], 
                "Enriched pathway mirnaGenes" = useCts[ord], "Total mirnaGenes" = nmirnaGene, 
                "Total filtered mirnaGenes" = nFilteredmirnaGene,
-               "Enriched miRNA-Genes" = pathsizes[, "Enriched miRNA-Genes"],
-               "Genes Enriched"=sapply(pathsizes[, "Genes Enriched"],c),
-               "miRNAs Enriched"=sapply(pathsizes[, "miRNAs Enriched"],c));
+               "Enriched miRNA-Genes" = pathsizes[ord, "Enriched miRNA-Genes"],
+               "Genes Enriched"=sapply(pathsizes[ord, "Genes Enriched"],c),
+               "miRNAs Enriched"=sapply(pathsizes[ord, "miRNAs Enriched"],c));
             r1;
          } else {
             r1 = list(pvalues = pvs);
