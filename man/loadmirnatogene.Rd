@@ -42,10 +42,10 @@ genecol="Entrez Gene ID", columns=NA)
 The method returns an object of type mirnapath, a list with
 components:
 
-  \item{ mirnaTable }{
+  \item{mirnaTable}{
       data.frame containing the miRNA results data
   }
-  \item{ columns }{
+  \item{columns}{
       list containing the names of required column headers
       associated to the actual column header supplied in the
       dataset contained in mirnaTable. Required headers:
@@ -53,11 +53,11 @@ components:
       pvaluecol, foldchangecol, expressioncol,
       filterflagcol
   }
-  \item{ groupcount }{
+  \item{groupcount}{
       the number of groups contained in mirnaTable using the
       groupcol, if supplied
   }
-  \item{ state }{
+  \item{state}{
       the current state of the object, using the following
       values in order of progress through the typical workflow:
       unfiltered, filtered, enriched.
@@ -69,11 +69,9 @@ components:
     biomarkers and insights into disease pathways, Journal of
     Alzheimer's Disease 14, 27-41.
 }
-\author{ James M. Ward \email{jmw86069@gmail.com} }
-\note{ ~~further notes~~ 
 
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\author{James M. Ward \email{jmw86069@gmail.com}}
+
 \seealso{
     \code{\link{loadmirnapath}}
     \code{\link{filtermirnapath}}
