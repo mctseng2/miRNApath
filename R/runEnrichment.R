@@ -157,14 +157,23 @@ function
       # Determine permutation P-value (if exists)
       if (permutations > 0)
       {
+         # April 2009: Fix bug when permutations do not supply results for
+         # all pathwayIDs, and cannot be directly rbind'ed into a data.frame
+         permIDs = sort(unique(do.call(c, lapply(1:length(permresults), function(j)
+                     {
+                        names(permresults[[j]]$pvalues);
+                     })) ));
          permtable = do.call(rbind, lapply(1:length(permresults), function(j)
-         {
-            permresults[[j]]$pvalues;
-         } ) );
+               {
+                  pTemp = permresults[[j]]$pvalues[permIDs];
+                  names(pTemp) = permIDs;
+                  pTemp[is.na(pTemp)] = 1;
+                  pTemp;
+               } ) );
          permps = apply(permtable, 2, function(i)
-         {
-            (rank(i)/(length(i)-1))[1];
-         } )
+            {
+               (rank(i)[1]/length(i));
+            } )
          permresults[[1]]$permpvalues = permps;
       }
       permresults[[1]];
