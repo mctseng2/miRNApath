@@ -1,0 +1,28 @@
+citHeader("To cite miRNApath in publications use:")
+citEntry(entry="article",  
+   author="John P. Cogswell, James M. Ward, Ian A. Taylor, 
+   Michelle Waters, Yunling Shi, Brian Cannon, Kevin Kelnar, 
+   Jon Kemppainen, David Brown, Caifu Chen, Rab K. Prinjha, 
+   Jill C. Richardson, Ann M. Saunders, Allen D. Roses, and 
+   Cynthia A. Richards",
+   title="Identification of miRNA changes in Alzheimer's disease 
+   brain and CSF yields putative biomarkers and insights into 
+   disease pathways",
+   journal="Journal of Alzheimer's Disease",
+   year="2008",
+   volume="14",
+   pages="27-41",
+   textVersion = paste("John P. Cogswell, James M. Ward, Ian A. 
+   Taylor, Michelle Waters, Yunling Shi, Brian Cannon, Kevin 
+   Kelnar, Jon Kemppainen, David Brown, Caifu Chen, Rab K. 
+   Prinjha, Jill C. Richardson, Ann M. Saunders, Allen D. 
+   Roses, and Cynthia A. Richards.",
+    "Identification of miRNA changes in Alzheimer's disease 
+    brain and CSF yields putative biomarkers and insights into
+    disease pathways.",
+    "Journal of Alzheimer's Disease 14 27-41 (2008)."))
+
+citFooter("We have invested a lot of time and effort in 
+   creating the miRNApath package,",
+   "please cite it when using it for data analysis.")
+
