@@ -1,7 +1,7 @@
 Package: miRNApath
 Type: Package
 Title: miRNApath: Pathway Enrichment for miRNA Expression Data
-Version: 1.31.0
+Version: 1.32.0
 Author: James M. Ward <jmw86069@gmail.com> with contributions
    from Yunling Shi, Cindy Richards, John P. Cogswell
 Maintainer: James M. Ward <jmw86069@gmail.com>
