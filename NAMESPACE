@@ -1,0 +1,11 @@
+
+exportPattern("mirnaobj",
+   "loadmirnapath",
+   "filtermirnapath",
+   "loadmirnatogene",
+   "loadmirnapathways",
+   "runEnrichment",
+   "mirnaTable")
+
+exportMethods("show")
+exportClasses("mirnapath")
