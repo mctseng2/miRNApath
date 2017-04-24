@@ -1,0 +1,23 @@
+Version 1.1
+-- Updated code to use S4 object "mirnapath" instead of S3 object.
+-- Changes "Enriched by Gene" and "Enriched by miRNA" not to be
+   a concatenated long string -- almost always too long to read
+   anyway.
+
+Version 1.0
+Initial release.
+
+Version 1.1
+Changed objects to S4 format
+
+Version 1.1.1
+Updated runEnrichment and mirnaTable to remove the "Enriched by miRNA"
+concatenated strings, which were way too long to be useful.
+
+Version 1.1.3
+Updated the miRNA-gene counts methodology; fixed
+the strategy for ignoring pathways with no hits.
+
+Version 1.3.3
+Updated permutation logic to handle empty when permutations
+show enrichment in only a subset of overall pathways.
